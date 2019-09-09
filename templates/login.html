@@ -1,0 +1,68 @@
+{% extends 'base/master.html' %}
+{% block 'title' %} Signin Page {%  endblock %}
+{% block 'body' %}
+
+            <!-- Page Heading -->
+			<section class="page-heading">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<h1>Login</h1>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Page Heading / End -->
+            <!-- Page Content -->
+			<section class="page-content">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="box">
+
+								{%if messages %}
+
+								<div class = "alert alert-danger">
+									<ul>
+										{% for message in messages %}
+										<li>
+											{{ message }}
+										</li>
+										{% endfor %}
+									</ul>
+								</div>
+
+								{%endif%}
+
+								<h3>Login</h3>
+
+								<form action="{% url 'signin' %}" method="POST" role="form">
+									{% csrf_token %}
+									<div class="form-group">
+										<label>Username or email address <span class="required">*</span></label>
+										<input type="text" class="form-control" name="username">
+									</div>
+									<div class="form-group">
+										<div class="clearfix">
+											<label class="pull-left">
+												Password <span class="required">*</span>
+											</label>
+										</div>
+										<input type="password" class="form-control" name="password">
+									</div>
+									<button type="submit" class="btn btn-primary btn-inline">Login</button>&nbsp; &nbsp; &nbsp;
+
+								</form>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+			<!-- Page Content / End -->
+
+{% endblock %}

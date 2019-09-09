@@ -1,0 +1,52 @@
+{% extends 'base/master.html'%}
+{% block 'title' %}   I am Dashboard  {%  endblock %}
+{% block 'body' %}
+{% load staticfiles %}
+
+<div class="container">
+     <div class="col-md-4">
+         <div class="box">
+            <img src="{{MEDIA_URL}}{{jobseeker.profile.url}}" class="profile">
+          </div>
+
+          <div class="box">
+            <h2>{{user.first_name}} {{user.last_name}}</h2>
+            <h4>{{jobseeker.professional_title}}</h4>
+            <hr/>
+           <a href="#"><i class="fa fa-globe"></i>&nbsp;&nbsp;{{jobseeker.url}} </a>
+           <br/>
+           <a href="#"><i class="fa fa-mobile"></i>&nbsp; &nbsp;{{jobseeker.contact_number}} </a>
+           <p>{{jobseeker.address}}</p>
+
+             {% if jobseeker.gender == 'male' %}
+                <a href="#"><i class="fa fa-mars"></i> Male</a>
+              {% elif jobseeker.gender == 'female' %}
+                <a href="#"><i class="fa fa-mars"></i> Female</a>
+              {% else %}
+                <a href="#"><i class="fa fa-transgender"></i> Other</a>
+              {% endif %}
+              &nbsp; &nbsp; <a href="#"><i class="fa fa-calendar"></i> {{jobseeker.experience_year}} </a> &nbsp;&nbsp;
+              <a href="#"><i class="fa fa-university"></i>{{jobseeker.qualification}}</a>
+
+          </div>
+     </div>
+
+    <div class="col-md-8">
+        <div class="box">
+            <h2>About Myself</h2>
+            {{jobseeker.description}}
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+ {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base/master.html'%}
+
+{% block 'title' %}   I am Company  {%  endblock %}
+
+{% block 'body' %}
+
+ <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Create your Company Account</h2>
+        <form action="{% url 'create_company' %}" method="POST" enctype="multipart/form-data">
+            {{form}}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+ </div>
+ {% endblock %}
