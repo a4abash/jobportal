@@ -1,5 +1,33 @@
 {% extends 'base/master.html'%}
-{% block 'title' %}   I am Dashboard  {%  endblock %}
+{% block 'title' %}   I am Company-Dashboard  {%  endblock %}
 {% block 'body' %}
-<h3>This is Company </h3>
+{% load staticfiles %}
+
+<div class="container">
+   <div class="col-md-4">
+      <div class="box">
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+                  <p>{{company.address}}</p>
+       <a href="#"><i class="fa fa-globe"></i>&nbsp;&nbsp;{{company.website}} </a>
+           <br/>
+       <a href="#"><i class="fa fa-mobile"></i>&nbsp; &nbsp;{{company.contact}} </a>
+
+       <h5>{{company.company_type}}</h5>
+
+      </div>
+   </div>
+
+    <div class="col-md-8">
+       <div class="box">
+          <h2>Description</h2>
+        <p>{{company.description}}</p>
+       </div>
+
+    </div>
+
+
+</div>
+
+
+
  {% endblock %}

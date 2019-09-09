@@ -62,7 +62,13 @@ def signout(request):
     return redirect('signin')
 
 def company_dashboard(request):
-    return render(request,'company_dashboard.html')
+    x = User.objects.get(id=request.user.id)
+    y = Company.objects.get(user_id=request.user.id)
+    context = {
+        'user': x,
+        'company' : y
+    }
+    return render(request,'company_dashboard.html',context)
 
 def who(request):
     return render(request,'who.html')
