@@ -7,6 +7,8 @@ from jobseeker.models import JobSeeker
 from company.models import Company
 from .forms import SignUpForm
 from django.contrib.auth.models import User
+from jobseeker.models import JobSeeker,Project
+from jobseeker.forms import JobSeekerProjectForm
 def index(request):
     return render(request,'index.html')
 
@@ -49,13 +51,27 @@ def signin(request):
 
 @login_required(login_url='signin')
 def dashboard(request):
-    a = User.objects.get(id=request.user.id)
-    b = JobSeeker.objects.get(user_id=request.user.id)
-    context = {
-        'user' : a,
-        'jobseeker' : b
-    }
-    return render(request, 'dashboard.html',context)
+    if request.method=='GET':
+        a = User.objects.get(id=request.user.id)
+        b = JobSeeker.objects.get(user_id=request.user.id)
+        project = Project.objects.filter(jobseeker_id=b.id)[::-1]
+        context = {
+            'user' : a,
+            'jobseeker' : b,
+            'jobseeker_project_form':JobSeekerProjectForm(),
+            'project':project,
+        }
+        return render(request, 'dashboard.html',context)
+    else:
+        form = JobSeekerProjectForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            a = JobSeeker.objects.get(user_id=request.user.id)
+            data.jobseeker_id = a.id
+            data.save()
+            return redirect('dashboard')
+        else:
+            return redirect('dashboard')
 
 def signout(request):
     logout(request)

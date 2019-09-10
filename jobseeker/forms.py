@@ -1,5 +1,5 @@
 from django import forms
-from .models import JobSeeker
+from .models import JobSeeker,Project
 
 class JobSeekerForm(forms.ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -14,3 +14,12 @@ class JobSeekerForm(forms.ModelForm):
     class Meta:
         model = JobSeeker
         exclude = ['user']
+
+class JobSeekerProjectForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}))
+    link = forms.URLField(widget=forms.URLInput(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = Project
+        exclude = ('jobseeker',)

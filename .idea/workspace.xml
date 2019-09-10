@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf01e7b3-7066-4d0a-97e0-7c1ec9390df9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyjob/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/easyjob/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyjob/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/easyjob/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/company_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/company_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobseeker/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobseeker/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +70,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
