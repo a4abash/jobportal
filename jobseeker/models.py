@@ -6,7 +6,7 @@ gender = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'))
 class JobSeeker(models.Model):
     address = models.CharField(max_length=100)
     experience_year = models.IntegerField(default=0, null=True, blank=True)
-    cv = models.FileField(upload_to='cv/')
+    cv = models.FileField(upload_to='cv/',null=True, blank=True)
     profile = models.ImageField(upload_to='profile/')
     professional_title = models.CharField(max_length=100, null=True, blank=True)
     contact_number = models.CharField(max_length=10)

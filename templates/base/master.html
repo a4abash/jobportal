@@ -49,13 +49,10 @@
 	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicons/favicon-152.png' %}">
 
 </head>
-<body>
-
-
 
 <h1 align="center" style="color:skyblue;">{% block 'h1' %}   {%  endblock %}<br>JobPortal.com</h1>
 
-<div class="site-wrapper">
+<body class="site-wrapper">
 		<!-- Header -->
 		<header class="header header-menu-fullw">
 
@@ -286,13 +283,6 @@
 			</footer>
 		<!-- Footer / End -->
 
-
-
-
-
-
-
-
 <!-- Javascript Files
 	================================================== -->
 	<script src=" {% static 'vendor/jquery-1.11.0.min.js' %}"></script>
@@ -333,6 +323,10 @@
 		});
 	});
 	</script>
-
+	<script>
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
 </body>
 </html>

@@ -7,8 +7,8 @@ from jobseeker.models import JobSeeker
 from company.models import Company
 from .forms import SignUpForm
 from django.contrib.auth.models import User
-from jobseeker.models import JobSeeker,Project
-from jobseeker.forms import JobSeekerProjectForm
+from jobseeker.models import JobSeeker,Project,Skill,Experience
+from jobseeker.forms import JobSeekerProjectForm,SkillForm,ExperienceForm
 def index(request):
     return render(request,'index.html')
 
@@ -55,11 +55,18 @@ def dashboard(request):
         a = User.objects.get(id=request.user.id)
         b = JobSeeker.objects.get(user_id=request.user.id)
         project = Project.objects.filter(jobseeker_id=b.id)[::-1]
+        skill = Skill.objects.filter(jobseeker_id=b.id)
+        experience = Experience.objects.filter(jobseeker_id=b.id)
+
         context = {
             'user' : a,
             'jobseeker' : b,
             'jobseeker_project_form':JobSeekerProjectForm(),
             'project':project,
+            'sform':SkillForm(),
+            'skill':skill,
+            'expform':ExperienceForm(),
+            'experience':experience,
         }
         return render(request, 'dashboard.html',context)
     else:
