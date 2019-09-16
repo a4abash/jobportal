@@ -8,7 +8,7 @@ from company.models import Company
 from .forms import SignUpForm
 from django.contrib.auth.models import User
 from jobseeker.models import JobSeeker,Project,Skill,Experience
-from jobseeker.forms import JobSeekerProjectForm,SkillForm,ExperienceForm
+from jobseeker.forms import JobSeekerProjectForm,SkillForm,ExperienceForm,JobSeekerUpdateForm
 def index(request):
     return render(request,'index.html')
 
@@ -67,6 +67,7 @@ def dashboard(request):
             'skill':skill,
             'expform':ExperienceForm(),
             'experience':experience,
+            'jform':JobSeekerUpdateForm(instance=b),
         }
         return render(request, 'dashboard.html',context)
     else:

@@ -10,9 +10,9 @@
           </div>
 
           <div class="box">
-              <h2>{{user.first_name}} {{user.last_name}}</h2>
+              <h2>{{user.first_name}} {{user.last_name}}<a href="#" data-toggle="modal" data-target="#edit_name"><i class="fa fa-pencil"></i> </a> </h2>
               <p>@{{user.username}}</p>
-              <h4>{{jobseeker.professional_title}}</h4>
+              <h4>{{jobseeker.professional_title}}<a href="#" style="float:right;" data-toggle="modal" data-target="#update_details"><i class="fa fa-pencil"></i> </a> </h4>
                 <hr/>
             <a href="#"><i class="fa fa-globe"></i>&nbsp;&nbsp;{{jobseeker.url}} </a>
             <br/>
@@ -35,7 +35,7 @@
              <h4 style="margin-left:40%;">Skills</h4>
              <a href="#" style="float:right;" data-toggle="modal" data-target="#create_skill"><i class="fa fa-plus"></i> </a>
              {% for s in skill %}
-             <span class="skill" style="border:1px solid black;padding:2px;background-color:blue;color:#fff;border-radius:5px;opacity:0.6" data-toggle="tooltip" data-placement="top" title="{{s.proficiency_level}}">{{s.skill_title}}</span>
+             <span class="skill" style="border:1px solid black;padding:2px;background-color:blue;color:#fff;border-radius:5px;opacity:0.6" data-toggle="tooltip" data-placement="top" title="{{s.proficiency_level}}">{{s.skill_title}}<a href="{% url 'skill_delete' s.id %}" style="font-weight:bold;font-size:14px;color:#8b0000;">x</a> </span>
              {% endfor %}
          </div>
          <br/>
@@ -58,7 +58,7 @@
                     <tr>
                         <td>{{p.title}}</td>
                         <td>{{p.description}}</td>
-                        <td>edit | delete</td>
+                        <td><a href="{% url 'edit_project' p.id %}"><i class="fa fa-pencil"></i> </a> | <a href="#"><i class="fa fa-trash"></i> </a></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -133,18 +133,23 @@
 </div>
 
 
-<!-- Modal for experience -->
-<div class="modal fade" id="create_experience" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal for Edit name -->
+<div class="modal fade" id="edit_name" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form method="post" action="{% url 'exp_store' %}">
+        <form method="post" action="{% url 'name_update' %}">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="forexperience">Add New Experience</h4>
+            <h4 class="modal-title" id="foreditname">Edit Name</h4>
           </div>
             <div class="modal-body">
+                <div class="modal-body">
+                    First name
+                    <input type="text" class="form-control" name="fname" value="{{user.first_name}}">
+                    Last name
+                    <input type="text" class="form-control" name="lname" value="{{user.last_name}}">
+                </div>
               {% csrf_token %}
-                {{expform}}
 
           </div>
           <div class="modal-footer">
@@ -156,4 +161,26 @@
   </div>
 </div>
 
+<!-- Modal for update details -->
+<div class="modal fade" id="update_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'details_update' %}">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="forupdatedetails">Edit Details</h4>
+          </div>
+            <div class="modal-body">
+              {% csrf_token %}
+                {{jform}}
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
