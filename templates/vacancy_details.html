@@ -1,0 +1,22 @@
+{% extends 'base/master.html'%}
+{% block 'title' %}   Details of vacancy  {%  endblock %}
+{% block 'body' %}
+
+<!-- Provide the detail of particular task-->
+ <div class="container">
+     <div class="row">
+         <div class="col-md-10 col-md-offset-1">
+             <h4>{{job.title}}</h4>
+             <img src="{{MEDIA_URL}}{{job.image.url}}" class="image" style="width:30%;height:auto;">
+             <p>
+                 {{job.description}}
+             </p>
+             <a href="#" class="btn btn-success">Apply Now</a>
+             <hr/>
+
+         </div>
+     </div>
+
+ </div>
+
+ {% endblock %}

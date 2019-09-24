@@ -1,0 +1,18 @@
+{% extends 'base/master.html'%}
+{% block 'title' %}   Add vacancy  {%  endblock %}
+{% block 'body' %}
+
+<!-- Add vacancy from Company Section-->
+ <div class="container">
+     <div class="col-md-8 col-md-offset-2">
+         <h3>Add vacancy</h3>
+        <form action="{% url 'vacancy_create' %}" method="POST" enctype="multipart/form-data">
+            {{form}}
+            {% csrf_token %}
+            <hr/>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+     </div>
+ </div>
+
+ {% endblock %}

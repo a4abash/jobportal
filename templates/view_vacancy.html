@@ -1,0 +1,24 @@
+{% extends 'base/master.html'%}
+{% block 'title' %}   View vacancy  {%  endblock %}
+{% block 'body' %}
+
+<!-- List all the added vacancies-->
+ <div class="container">
+     <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+          <h3>All Vacancy</h3>
+          <table class="table">
+              <th>Vacancy Title</th>
+              <th>Action</th>
+              {% for j in job %}
+              <tr>
+                  <td><a href="{% url 'vacancy_details' j.id %}"> {{j.title}}</a> </td>
+                  <td>Del|Edit</td>
+              </tr>
+              {% endfor %}
+          </table>
+      </div>
+     </div>
+ </div>
+
+ {% endblock %}

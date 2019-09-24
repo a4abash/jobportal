@@ -19,15 +19,15 @@ from .import views
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',views.index),
-    path('signup/', views.signup, name='signup'),
-    path('signin/', views.signin, name='signin'),
-    path('who/', views.who, name='who'),
-    path('jobseeker/', include('jobseeker.urls')),
-    path('dashboard/',views.dashboard,name='dashboard'),
-    path('company/',include('company.urls')),
-    path('company_dashboard/',views.company_dashboard,name='company_dashboard'),
-    path('signout', views.signout, name='signout'),
+    path('admin/', admin.site.urls),  # admin page
+    path('', views.home),  # homepage
+    path('signup/', views.signup, name='signup'),  # url for signup
+    path('signin/', views.signin, name='signin'),  # url for login
+    path('who/', views.who, name='who'),  # url for who page
+    path('jobseeker/', include('jobseeker.urls')),  # url to include jobseeker.url
+    path('dashboard/', views.dashboard, name='dashboard'),  #Jobseeker Project update section added
+    path('company/', include('company.urls')),  # url to include company.url
+    path('company_dashboard/', views.company_dashboard, name='company_dashboard'),  # url for company dashboard
+    path('signout', views.signout, name='signout'),  # url for logout function
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,33 +1,138 @@
 {% extends 'base/master.html'%}
-{% block 'title' %}   I am Company-Dashboard  {%  endblock %}
+{% block 'title' %} Company-Dashboard  {%  endblock %}
 {% block 'body' %}
 {% load staticfiles %}
 
 <div class="container">
+
    <div class="col-md-4">
       <div class="box">
-        <h2>{{user.first_name}} {{user.last_name}}</h2>
-                  <p>{{company.address}}</p>
-       <a href="#"><i class="fa fa-globe"></i>&nbsp;&nbsp;{{company.website}} </a>
-           <br/>
-       <a href="#"><i class="fa fa-mobile"></i>&nbsp; &nbsp;{{company.contact}} </a>
 
-       <h5>{{company.company_type}}</h5>
+          <!--Company first name and last name section-->
+            <h4>{{user.first_name}} {{user.last_name}}<a href="#" style="float:right;" data-toggle="modal" data-target="#edit_cname">
+                <i class="fa fa-pencil"></i> </a> </h4>
+            <h6>@{{user.username}}</h6>
 
-      </div>
-   </div>
+          <!--Company details section-->
+            <h6>Type: {{company.company_type}}<a href="#" style="float:right;" data-toggle="modal" data-target="#update_companyDetails">
+                  <i class="fa fa-pencil"></i> </a></h6>
+            <h6>Website: <a href="#"><i class="fa fa-globe"></i>&nbsp;&nbsp;{{company.website}} </a><br/></h6>
+            <h6>Contact: <a href="#"><i class="fa fa-mobile"></i>&nbsp; &nbsp;{{company.contact}} </a></h6>
+            <h6>Address: {{company.address}}</h6>
+      </div> <br/>
+       <!-- end of box-->
+
+       <!--Company description section-->
+       <div class="box">
+          <h2>Description <a href="#" style="float:right;" data-toggle="modal" data-target="#edit_cdescription">
+              <i class="fa fa-pencil"></i> </a>
+          </h2>
+            <p>{{company.description}}</p>
+       </div>
+       <!-- end of box-->
+
+   </div><!--end of column-->
 
     <div class="col-md-8">
-       <div class="box">
-          <h2>Description</h2>
-        <p>{{company.description}}</p>
-       </div>
+        <!--Buttons-->
+        <a href="{% url 'vacancy_create' %}" class="btn btn-success">Post Vacancy<i class="fa fa-plus" style="margin-left:5%"></i> </a>
+        <a href="{% url 'vacancy_view' %}" style="margin-left:5%;" class="btn btn-success">View All Vacancy<i class="fa fa-eye" style="margin-left:5%"></i> </a>
+        <hr/>
 
-    </div>
+        <div class="box">
+            <table class="table">
+                <h4 style="margin-left:35%;">Recent Vacancies</h4>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+                {% for j in job %}
+                    <tr>
+                        <td><a href="{% url 'vacancy_details' j.id %}">{{j.title}}</a></td>
+                        <td><a href="{% url 'vacancy_details' j.id %}">{{j.description}}</a></td>
+                        <td><a href="{% url 'vacancy_details' j.id %}"><i class="fa fa-eye"></i></a></td>
+                    </tr>
+                {%endfor%}
+            </table>
 
+        </div> <hr/> <!--end of box-->
+    </div> <!--end of column-->
 
 </div>
 
+<!-- Modal for Edit Company name -->
+<!--Company first name and last name section-->
+<div class="modal fade" id="edit_cname" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'cname_update' %}">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="foreditcompanyname">Edit Name</h4>
+          </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    First name
+                    <input type="text" class="form-control" name="fname" value="{{user.first_name}}">
+                    Last name
+                    <input type="text" class="form-control" name="lname" value="{{user.last_name}}">
+                </div>
+              {% csrf_token %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for about Company -->
+<!--Company details section-->
+<div class="modal fade" id="update_companyDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'update_companyDetails' %}">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="forupdatedetails">Edit Details</h4>
+          </div>
+            <div class="modal-body">
+              {% csrf_token %}
+                {{companyupdateform}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for company description -->
+<!--Company description section-->
+<div class="modal fade" id="edit_cdescription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'edit_cdescription' %}">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="foreditDescription">Edit Description</h4>
+          </div>
+            <div class="modal-body">
+                {% csrf_token %}
+                {{cform}}
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
 
 
  {% endblock %}

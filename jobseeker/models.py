@@ -3,7 +3,11 @@ from django.contrib.auth.models import User
 #from phone_field import PhoneField
 # Create your models here.
 gender = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'))
+
+
+# adds object Jobseeker to jobseeker with mentioned properties
 class JobSeeker(models.Model):
+    full_name = models.CharField(max_length=100, default="Ram")
     address = models.CharField(max_length=100)
     experience_year = models.IntegerField(default=0, null=True, blank=True)
     cv = models.FileField(upload_to='cv/',null=True, blank=True)
@@ -15,11 +19,13 @@ class JobSeeker(models.Model):
     url = models.URLField(blank=True, null=True)
     gender = models.CharField(choices=gender, max_length=10)
     qualification = models.CharField(max_length=100, help_text="Your Highest Degree")
-    user= models.ForeignKey(User, on_delete=models.CASCADE,default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=1)
 
     def __str__(self):
         return self.user.username
 
+
+# adds object skill to jobseeker with mentioned properties
 class Skill(models.Model):
     skill_title = models.CharField(max_length=100)
     proficiency_level = models.IntegerField()
@@ -28,6 +34,8 @@ class Skill(models.Model):
     def __str__(self):
         return self.skill_title
 
+
+# adds object Experience to jobseeker with mentioned properties
 class Experience(models.Model):
     company = models.CharField(max_length=100)
     post = models.CharField(max_length=100)
@@ -38,6 +46,8 @@ class Experience(models.Model):
     def __str__(self):
         return self.jobseeker.user.username
 
+
+# adds object Project to jobseeker with mentioned properties
 class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)

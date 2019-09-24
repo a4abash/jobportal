@@ -6,18 +6,24 @@
 <div class="container">
      <div class="col-md-4">
          <div class="box">
-            <img src="{{MEDIA_URL}}{{jobseeker.profile.url}}" class="profile">
-          </div>
+             <!--Jobseeker profile image section-->
+             <h3><img src="{{MEDIA_URL}}{{jobseeker.profile.url}}" class="profile">
+                 <a href="#" style="float:right;" data-toggle="modal" data-target="#edit_profile"><i class="fa fa-upload"></i> </a></h3>
+          </div><br/>
 
-          <div class="box">
-              <h2>{{user.first_name}} {{user.last_name}}<a href="#" data-toggle="modal" data-target="#edit_name"><i class="fa fa-pencil"></i> </a> </h2>
-              <p>@{{user.username}}</p>
-              <h4>{{jobseeker.professional_title}}<a href="#" style="float:right;" data-toggle="modal" data-target="#update_details"><i class="fa fa-pencil"></i> </a> </h4>
-                <hr/>
-            <a href="#"><i class="fa fa-globe"></i>&nbsp;&nbsp;{{jobseeker.url}} </a>
-            <br/>
-            <a href="#"><i class="fa fa-mobile"></i>&nbsp; &nbsp;{{jobseeker.contact_number}} </a>
-            <p>{{jobseeker.address}}</p>
+         <div class="box">
+            <!--Jobseeker first name and last name section-->
+              <h5>Name: {{user.first_name}} {{user.last_name}}
+                  <a href="#" style="float:right;" data-toggle="modal" data-target="#edit_name"><i class="fa fa-pencil"></i> </a> </h5>
+              <h6>Username: <a href="#">@{{user.username}}</a></h6>
+
+              <!--Jobseeker details section-->
+              <h5>Post: {{jobseeker.professional_title}}<a href="#" style="float:right;" data-toggle="modal" data-target="#update_details">
+                  <i class="fa fa-pencil"></i> </a>
+              </h5>
+                <h6>Website: <a href="#"><i class="fa fa-globe"></i> &nbsp;{{jobseeker.url}} </a></h6>
+                <h6>Contact: <a href="#"><i class="fa fa-mobile"></i>&nbsp;{{jobseeker.contact_number}} </a></h6>
+                <h6>Address: {{jobseeker.address}}</h6>
 
              {% if jobseeker.gender == 'male' %}
                 <a href="#"><i class="fa fa-mars"></i> Male</a>
@@ -28,29 +34,33 @@
               {% endif %}
               &nbsp; &nbsp; <a href="#"><i class="fa fa-calendar"></i> {{jobseeker.experience_year}} </a> &nbsp;&nbsp;
               <a href="#"><i class="fa fa-university"></i>{{jobseeker.qualification}}</a>
+          </div><br/>
 
-          </div>
-         <br/>
+        <!--Jobseeker skills section-->
          <div class="box">
              <h4 style="margin-left:40%;">Skills</h4>
              <a href="#" style="float:right;" data-toggle="modal" data-target="#create_skill"><i class="fa fa-plus"></i> </a>
              {% for s in skill %}
-             <span class="skill" style="border:1px solid black;padding:2px;background-color:blue;color:#fff;border-radius:5px;opacity:0.6" data-toggle="tooltip" data-placement="top" title="{{s.proficiency_level}}">{{s.skill_title}}<a href="{% url 'skill_delete' s.id %}" style="font-weight:bold;font-size:14px;color:#8b0000;">x</a> </span>
-             {% endfor %}
-         </div>
-         <br/>
+             <span class="skill" style="border:1px solid black;margin-left:2%;padding:2px;background-color:blue;color:#fff;border-radius:5px;opacity:0.6"
+                   data-toggle="tooltip" data-placement="top" title="{{s.proficiency_level}}">{{s.skill_title}}
+                 <a href="{% url 'skill_delete' s.id %}" style="font-weight:bold;font-size:14px;color:#8b0000;">x</a> </span>
+             {%endfor%}
+         </div> <br/>
+
      </div>
 
+    <!--Jobseeker description section-->
     <div class="col-md-8">
         <div class="box">
-            <h2>About Myself</h2>
-            {{jobseeker.description}}
-        </div>
-        <br/>
+            <h2 style="margin-left:30%;">About Myself <a href="#" style="float:right;"  data-toggle="modal" data-target="#edit_description">
+                <i class="fa fa-pencil"></i> </a></h2>{{jobseeker.description}}
+        </div> <br/>
+
+        <!--Jobseeker project section-->
         <div class="box">
-            <h4 style="margin-left:35%; ">Your Projects</h4>
             <a href="#" style="float:right;" data-toggle="modal" data-target="#create_project"><i class="fa fa-plus"></i> </a>
             <table class="table">
+                <h4 style="margin-left:35%; ">Your Projects</h4>
                 <th>Project Name</th>
                 <th>Project Description</th>
                 <th>Action</th>
@@ -58,47 +68,52 @@
                     <tr>
                         <td>{{p.title}}</td>
                         <td>{{p.description}}</td>
-                        <td><a href="{% url 'edit_project' p.id %}"><i class="fa fa-pencil"></i> </a> | <a href="#"><i class="fa fa-trash"></i> </a></td>
+                        <td><a href="{% url 'edit_project' p.id %}"><i class="fa fa-pencil"></i>
+                        </a> | <a href="{% url 'rmvprj' p.id %}"> <i class="fa fa-trash"></i> </a></td>
                     </tr>
-                {% endfor %}
+                {%endfor%}
             </table>
-        </div>
-        <br/>
+        </div> <br/>
+
+        <!--Jobseeker Experience section-->
         <div class="box">
-            <h4 style="margin-left:40%;">Your Experience</h4>
              <a href="#" style="float:right;" data-toggle="modal" data-target="#create_experience"><i class="fa fa-plus"></i> </a>
+            <h4 style="margin-left:40%;">Your Experience</h4>
             <table class="table">
                 <th>Company</th>
                 <th>Post</th>
                 <th>Start-Date</th>
                 <th>End-date</th>
+                <th>Action</th>
                     {% for e in experience %}
                     <tr>
                         <td>{{e.company}}</td>
                         <td>{{e.post}}</td>
                         <td>{{e.start_date}}</td>
                         <td>{{e.end_date}}</td>
-
+                        <td><a href="#"> <i class="fa fa-edit"></i></a>||<a href="{% url 'exp_dlt' e.id %}"> <i class="fa fa-trash"></i></a> </td>
                     </tr>
                     {% endfor %}
             </table>
-        </div>
-        <br/>
+        </div> <br/>
+
     </div>
 
 </div>
-<!-- Modal for project-->
-<div class="modal fade" id="create_project" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<!-- Modal for Edit profile picture -->
+<!--Jobseeker profile picture edit section-->
+<div class="modal fade" id="edit_profile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form method="post" action="{% url 'dashboard' %}">
+        <form method="post" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add New Project</h4>
+            <h4 class="modal-title" id="foreditprofileimage">Edit Profile</h4>
           </div>
             <div class="modal-body">
+               {{pform}}
               {% csrf_token %}
-             {{jobseeker_project_form}}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -110,7 +125,60 @@
 </div>
 
 
+
+<!-- Modal for Edit name -->
+<!--Jobseeker first name and last name edit section-->
+<div class="modal fade" id="edit_name" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'name_update' %}">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="foreditname">Edit Name</h4>
+          </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <label>First name</label>
+                    <input type="text" class="form-control" name="fname" value="{{user.first_name}}">
+                    <label>Last name</label>
+                    <input type="text" class="form-control" name="lname" value="{{user.last_name}}">
+                </div>
+              {% csrf_token %}
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for update details title address contact gender qualification  -->
+<!--Jobseeker details update section-->
+<div class="modal fade" id="update_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'details_update' %}">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="forupdatedetails">Edit Details</h4>
+          </div>
+            <div class="modal-body">
+              {% csrf_token %}
+                {{jform}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 <!-- Modal for skill -->
+<!--Jobseeker skills update section-->
 <div class="modal fade" id="create_skill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -132,25 +200,19 @@
   </div>
 </div>
 
-
-<!-- Modal for Edit name -->
-<div class="modal fade" id="edit_name" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal for description -->
+<!--Jobseeker description section-->
+<div class="modal fade" id="edit_description" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form method="post" action="{% url 'name_update' %}">
+        <form method="post" action="{% url 'edit_description' %}">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="foreditname">Edit Name</h4>
+            <h4 class="modal-title" id="foreditdescription">Edit description</h4>
           </div>
             <div class="modal-body">
-                <div class="modal-body">
-                    First name
-                    <input type="text" class="form-control" name="fname" value="{{user.first_name}}">
-                    Last name
-                    <input type="text" class="form-control" name="lname" value="{{user.last_name}}">
-                </div>
               {% csrf_token %}
-
+                {{dform}}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -161,19 +223,19 @@
   </div>
 </div>
 
-<!-- Modal for update details -->
-<div class="modal fade" id="update_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal for project-->
+<!--Jobseeker project update section-->
+<div class="modal fade" id="create_project" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form method="post" action="{% url 'details_update' %}">
+        <form method="post" action="{% url 'dashboard' %}">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="forupdatedetails">Edit Details</h4>
+            <h4 class="modal-title" id="myModalLabel">Add New Project</h4>
           </div>
             <div class="modal-body">
               {% csrf_token %}
-                {{jform}}
-
+             {{jobseeker_project_form}}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -183,4 +245,28 @@
     </div>
   </div>
 </div>
+
+<!-- Modal for Experience -->
+<!--Jobseeker Experience update section-->
+<div class="modal fade" id="create_experience" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'experience_add' %}">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="foreditexperience">Add new Experience</h4>
+          </div>
+            <div class="modal-body">
+              {% csrf_token %}
+                {{expform}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
