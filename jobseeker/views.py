@@ -22,7 +22,7 @@ def create(request):
             context = {
                 'form': JobSeekerForm()
             }
-            return render(request,'jobseeker_create.html', context)
+            return render(request, 'jobseeker_create.html', context)
 
         else:
             form = JobSeekerForm(request.POST, request.FILES or None)

@@ -4,6 +4,7 @@ from .models import JobSeeker, Project, Skill, Experience
 
 # Designinig the Jobseeker form
 class JobSeekerForm(forms.ModelForm):
+    full_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     profile = forms.ImageField
     experience_year = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))

@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
     username = forms.CharField(required=True,widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Username'}))
 
-    email = forms.EmailField(required=True,widget=forms.EmailInput(
+    email = forms.EmailField(required=True, widget=forms.EmailInput(
         attrs={'class': 'form-control', 'placeholder': 'Email'}))
 
     password1 = forms.CharField(widget=forms.PasswordInput(

@@ -17,6 +17,7 @@ class Company(models.Model):
     def __str__(self):
         return self.user.username
 
+
 # adds object Job to company with mentioned properties
 class Job(models.Model):
     title = models.CharField(max_length=100)
