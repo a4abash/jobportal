@@ -11,7 +11,6 @@ urlpatterns = [
     path('edit-project/<int:x>', views.edit_project, name='edit_project'),  # project edit section
     path('project/delete/<int:x>', views.rmvprj, name='rmvprj'),  # removes each project from project table at a time
     path('experience-add/', views.experience_add, name='experience_add'),  # adds experience of user to Experience table
-
     path('experience/delete/<int:x>', views.exp_dlt, name='exp_dlt'),  # delete the data from experience table
 ]
 #     path('experience-edit/<int:x>', views.exp_edit, name='exp_edit'),  # edits the experience table

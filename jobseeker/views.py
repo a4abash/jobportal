@@ -115,7 +115,7 @@ def edit_project(request, x):
     j = JobSeeker.objects.get(user_id=request.user.id)
     project = Project.objects.get(id=x)
     if j.id == project.jobseeker_id:
-        form = JobSeekerProjectForm(request.POST or None,instance=project)
+        form = JobSeekerProjectForm(request.POST or None, instance=project)
         if form.is_valid():
             form.save()
             return redirect('dashboard')
@@ -153,17 +153,3 @@ def exp_dlt(request, x):
     d = Experience.objects.get(id=x)
     d.delete()
     return redirect('dashboard')
-
-'''
-# modifies the experience table
-def exp_edit(request, x):
-    experience = Experience.objects.get(id=x)
-    form = ExperienceForm(request.POST or None, instance=experience)
-    if form.is_valid:
-        form.save()
-        return redirect('dashboard')
-    context = {
-        'form': form,
-    }
-    return render(request, 'edit_experience.html', context)
-'''
